@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curve-Based Slicer for Multi-Axis DLP 3D Printing - SIGGRAPH Asia 2025</title>
+    <meta name="description" content="An innovative curve-based slicing algorithm for multi-axis DLP 3D printing with enhanced surface quality and print efficiency">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-text">CurveDLPSlicer</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#abstract" class="nav-link">Abstract</a></li>
+                <li><a href="#video" class="nav-link">Video</a></li>
+                <li><a href="#method" class="nav-link">Pipeline</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#downloads" class="nav-link">Downloads</a></li>
+                <li><a href="#bibtex" class="nav-link">BibTeX</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badges">
+                <div class="hero-badge conference-badge">
+                    <span>SIGGRAPH Asia 2025</span>
+                </div>
+                <div class="hero-badge journal-badge">
+                    <span>ACM Transaction on Graphics</span>
+                </div>
+            </div>
+            <div class="hero-teaser">
+                <img src="images/teaser_latest.jpg" alt="Curve-Based Slicer Overview" />
+            </div>
+            <h1 class="hero-title">
+                <span class="title-main">Curve-Based Slicer</span>
+                <span class="title-sub">for Multi-Axis DLP 3D Printing</span>
+            </h1>
+            <div class="authors">
+                <div class="author-group">
+                    <span class="author">Chengkai Dai<sup>1*</sup></span>
+                    <span class="author">Tao Liu<sup>2*</sup></span>
+                    <span class="author">Dezhao Guo<sup>3</sup></span>
+                    <span class="author">Binzhi Sun<sup>1,3</sup></span>
+                    <span class="author">Guoxin Fang<sup>1,3</sup></span>
+                    <span class="author">Yeung Yam<sup>1,3</sup></span>
+                    <span class="author">Charlie C.L. Wang<sup>2†</sup></span>
+                </div>
+                <div class="affiliations">
+                    <span class="affiliation"><sup>1</sup>Centre for Perceptual and Interactive Intelligence</span>
+                    <span class="affiliation"><sup>2</sup>The University of Manchester</span>
+                    <span class="affiliation"><sup>3</sup>The Chinese University of Hong Kong</span>
+                    <br>
+                    <span class="affiliation"><sup>*</sup>equal contribution</span>
+                    <br>
+                    <span class="affiliation"><sup>†</sup>corresponding author</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Paper</a>
+                <a href="#" class="btn btn-secondary">Code (Coming Soon)</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section id="abstract" class="section">
+        <div class="container">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-content">
+                <div class="abstract-text">
+                    This paper introduces a novel curve-based slicing method for generating planar layers with dynamically varying orientations in digital light processing (DLP) 3D printing. Our approach effectively addresses key challenges in DLP printing, such as regions with large overhangs and staircase artifacts, while preserving its intrinsic advantages of high resolution and fast printing speeds. We formulate the slicing problem as an optimization task, in which parametric curves are computed to define both the slicing layers and the model partitioning through their tangent planes. These curves inherently define motion trajectories for the build platform and can be optimized to meet critical manufacturing objectives, including collision-free motion and floating-free deposition. We validate our method through physical experiments on a robotic multi-axis DLP printing setup, demonstrating that the optimized curves can robustly guide smooth, high-quality fabrication of complex geometries.
+                </div>
+                <div class="abstract-visual">
+                    <div class="teaser-image">
+                        <img src="images/tangent.png" alt="Method Overview" />
+                        <div class="image-caption">The tangent planes of the parametric curve are used as planar layers for DLP printing.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="video-section">
+        <div class="container">
+            <h2 class="section-title">Video</h2>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pipeline Section -->
+    <section id="method" class="section">
+        <div class="container">
+            <h2 class="section-title">Pipeline</h2>
+            <div class="method-overview">
+                <div class="method-diagram">
+                    <img src="images/pipeline.png" alt="Pipeline Overview" />
+                    <div class="image-caption">After preparing the computational domain as a set of sample points Ω for the solid M and a set of surface sample point Ψ, our framework is based on the adaptively applied steps of optimization and splitting. (a) Starting from a straight curve as the trajectory of DLP printing, we optimize the trajectory by changing the positions of its control points (black dots). When critical manufacturing requirement such as floating-free (with floating point highlighted by arrows), the curve is split into two curves to be further optimized (b). Note that the region partition defined by the curves are co-optimized jointly with the curves as trajectories. When hard constraints are still not satisfied in the region covered by c₁(t), c₁(t) is further adaptively subdivided into two -- i.e., (c) there are three curves in total to be optimized to obtain the slicing result (d). The resultant curves define the trajectories of motion, which can be converted into the execution of robotic system by the computation of inverse kinematics to fabricate the final result (e).</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="section">
+        <div class="container">
+            <h2 class="section-title">Results</h2>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-image">
+                        <img src="images/results/bunny.png" alt="Bunny" />
+                    </div>
+                    <div class="result-overlay">
+                        <div class="result-info">
+                            <h4>Bunny</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-image">
+                        <img src="images/results/yoga.png" alt="Yoga" />
+                    </div>
+                    <div class="result-overlay">
+                        <div class="result-info">
+                            <h4>Yoga</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-image">
+                        <img src="images/results/woman.png" alt="Woman" />
+                    </div>
+                    <div class="result-overlay">
+                        <div class="result-info">
+                            <h4>Woman</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-image">
+                        <img src="images/results/hook.png" alt="Hook" />
+                    </div>
+                    <div class="result-overlay">
+                        <div class="result-info">
+                            <h4>Hook</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-image">
+                        <img src="images/results/3rings.png" alt="Toroidal-Tubes" />
+                    </div>
+                    <div class="result-overlay">
+                        <div class="result-info">
+                            <h4>Toroidal-Tubes</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-image">
+                        <img src="images/results/yoga.png" alt="Fertility" />
+                    </div>
+                    <div class="result-overlay">
+                        <div class="result-info">
+                            <h4>Fertility</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Physical Fabrication -->
+            <div class="fabrication-section">
+                <h3>Physical Fabrication</h3>
+                <div class="fabrication-showcase">
+                    <img src="images/results/family.jpg" alt="Physical fabrication results" />
+                    <div class="fabrication-caption">
+                        Physical fabrication results demonstrating the effectiveness of our curve-based slicing approach across various complex geometries.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloads Section -->
+    <section id="downloads" class="section downloads-section">
+        <div class="container">
+            <h2 class="section-title">Downloads</h2>
+            <div class="downloads-grid">
+                <div class="download-card">
+                    <div class="download-icon">
+                        📄
+                    </div>
+                    <h3>Paper</h3>
+                    <a href="#" class="download-btn">Download PDF</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        💻
+                    </div>
+                    <h3>Code (Coming Soon)</h3>
+                    <a href="#" class="download-btn">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BibTeX Section -->
+    <section id="bibtex" class="section">
+        <div class="container">
+            <h2 class="section-title">Citation</h2>
+            <div class="bibtex-container">
+                <pre><code>@article{dai2025curvedlpslicer,
+  title={Curve-Based Slicer for Multi-Axis DLP 3D Printing},
+  author={Dai, Chengkai and Liu, Tao and Guo, Dezhao and Sun, Binzhi and Fang, Guoxin and Yam, Yeung and Wang, Charlie C.L.},
+  journal={ACM Transactions on Graphics (TOG)},
+  note={To appear in SIGGRAPH Asia 2025},
+  year={2025},
+  publisher={ACM}
+}</code></pre>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    Copy
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2025 Curve-Based Slicer for Multi-Axis DLP 3D Printing. All rights reserved.</p>
+                    <p>Presented at SIGGRAPH Asia 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
