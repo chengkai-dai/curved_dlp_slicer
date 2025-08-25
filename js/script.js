@@ -285,85 +285,10 @@ function debounce(func, wait) {
     };
 }
 
-// ===== DOWNLOAD TRACKING =====
-function trackDownload(type) {
-    // Update localStorage for local tracking
-    const currentCount = parseInt(localStorage.getItem('paperDownloads') || '0');
-    const newCount = currentCount + 1;
-    localStorage.setItem('paperDownloads', newCount.toString());
-    
-    // Send to simple counting service for global stats
-    fetch('https://api.countapi.xyz/hit/curve-dlp-slicer/paper-download', {
-        method: 'GET'
-    }).catch(() => {
-        // Ignore errors, fallback to local count
-    });
-    
-    // Update display after a short delay to get latest count
-    setTimeout(() => {
-        updateDownloadCount();
-    }, 500);
-    
-    // Optional: Send analytics (uncomment if you want to use Google Analytics)
-    // if (typeof gtag !== 'undefined') {
-    //     gtag('event', 'download', {
-    //         'event_category': 'engagement',
-    //         'event_label': type
-    //     });
-    // }
-}
 
-function updateDownloadCount() {
-    const countElement = document.getElementById('download-count');
-    
-    if (countElement) {
-        // Use CountAPI for global download tracking
-        fetch('https://api.countapi.xyz/get/curve-dlp-slicer/paper-download')
-            .then(response => response.json())
-            .then(data => {
-                countElement.textContent = data.value || '0';
-            })
-            .catch(() => {
-                // Fallback to localStorage if CountAPI fails
-                const localCount = localStorage.getItem('paperDownloads') || '0';
-                countElement.textContent = localCount + ' (local)';
-            });
-    }
-}
-
-
-
-// Initialize download count on page load
-function initializeDownloadCount() {
-    updateDownloadCount();
-}
-
-// Add event listeners for download buttons
-function setupDownloadListeners() {
-    const heroPaperBtn = document.getElementById('hero-paper-btn');
-    const downloadPaperBtn = document.getElementById('download-paper-btn');
-    
-    if (heroPaperBtn) {
-        heroPaperBtn.addEventListener('click', function() {
-            trackDownload('paper');
-        });
-    }
-    
-    if (downloadPaperBtn) {
-        downloadPaperBtn.addEventListener('click', function() {
-            trackDownload('paper');
-        });
-    }
-}
 
 // ===== MINIMAL LOADING STATE =====
 window.addEventListener('load', () => {
     // Simple loading completion
     document.body.classList.add('loaded');
-    
-    // Initialize download count
-    initializeDownloadCount();
-    
-    // Setup download listeners
-    setupDownloadListeners();
 });
