@@ -71,6 +71,7 @@ body {
     left: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
@@ -203,6 +204,7 @@ body {
     height: auto;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    -o-object-fit: contain;
     object-fit: contain;
     transition: transform var(--transition);
 }
@@ -213,6 +215,7 @@ body {
 
 h1.hero-title {
     margin-bottom: var(--space-lg) !important;
+    font-size: 3.5rem !important; /* fallback for older Safari */
     font-size: clamp(3rem, 6vw, 4.5rem) !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
@@ -249,6 +252,7 @@ h1.hero-title {
 }
 
 .hero-buttons {
+    display: -webkit-flex;
     display: flex;
     gap: var(--space-md);
     justify-content: center;
@@ -341,6 +345,7 @@ h1.hero-title {
 }
 
 .section-title {
+    font-size: 1.75rem; /* fallback for older Safari */
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
     text-align: center;
@@ -545,6 +550,7 @@ h1.hero-title {
     height: auto;
     background: var(--bg-tertiary);
     border-radius: var(--radius-lg);
+    -o-object-fit: contain;
     object-fit: contain;
 }
 
