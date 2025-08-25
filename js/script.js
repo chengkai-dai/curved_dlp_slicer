@@ -309,6 +309,7 @@ function trackDownload(type) {
 function updateDownloadCount() {
     const count = localStorage.getItem('paperDownloads') || '0';
     const countElement = document.getElementById('download-count');
+    
     if (countElement) {
         countElement.textContent = count;
     }
@@ -319,6 +320,24 @@ function initializeDownloadCount() {
     updateDownloadCount();
 }
 
+// Add event listeners for download buttons
+function setupDownloadListeners() {
+    const heroPaperBtn = document.getElementById('hero-paper-btn');
+    const downloadPaperBtn = document.getElementById('download-paper-btn');
+    
+    if (heroPaperBtn) {
+        heroPaperBtn.addEventListener('click', function() {
+            trackDownload('paper');
+        });
+    }
+    
+    if (downloadPaperBtn) {
+        downloadPaperBtn.addEventListener('click', function() {
+            trackDownload('paper');
+        });
+    }
+}
+
 // ===== MINIMAL LOADING STATE =====
 window.addEventListener('load', () => {
     // Simple loading completion
@@ -326,4 +345,7 @@ window.addEventListener('load', () => {
     
     // Initialize download count
     initializeDownloadCount();
+    
+    // Setup download listeners
+    setupDownloadListeners();
 });
