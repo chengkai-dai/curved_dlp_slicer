@@ -774,6 +774,16 @@ h1.hero-title {
     color: var(--primary-color);
 }
 
+.download-stats {
+    margin-top: var(--space-sm);
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.download-stats span {
+    font-weight: 500;
+}
+
 /* ===== SAFARI SPECIFIC FIXES ===== */
 /* Detect Safari and apply fixes */
 @media not all and (min-resolution:.001dpcm) {

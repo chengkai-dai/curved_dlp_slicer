@@ -285,8 +285,45 @@ function debounce(func, wait) {
     };
 }
 
+// ===== DOWNLOAD TRACKING =====
+function trackDownload(type) {
+    // Get current download count from localStorage
+    const currentCount = parseInt(localStorage.getItem('paperDownloads') || '0');
+    const newCount = currentCount + 1;
+    
+    // Update localStorage
+    localStorage.setItem('paperDownloads', newCount.toString());
+    
+    // Update display
+    updateDownloadCount();
+    
+    // Optional: Send analytics (uncomment if you want to use Google Analytics)
+    // if (typeof gtag !== 'undefined') {
+    //     gtag('event', 'download', {
+    //         'event_category': 'engagement',
+    //         'event_label': type
+    //     });
+    // }
+}
+
+function updateDownloadCount() {
+    const count = localStorage.getItem('paperDownloads') || '0';
+    const countElement = document.getElementById('download-count');
+    if (countElement) {
+        countElement.textContent = count;
+    }
+}
+
+// Initialize download count on page load
+function initializeDownloadCount() {
+    updateDownloadCount();
+}
+
 // ===== MINIMAL LOADING STATE =====
 window.addEventListener('load', () => {
     // Simple loading completion
     document.body.classList.add('loaded');
+    
+    // Initialize download count
+    initializeDownloadCount();
 });
