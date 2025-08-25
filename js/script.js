@@ -287,15 +287,22 @@ function debounce(func, wait) {
 
 // ===== DOWNLOAD TRACKING =====
 function trackDownload(type) {
-    // Get current download count from localStorage
+    // Update localStorage for local tracking
     const currentCount = parseInt(localStorage.getItem('paperDownloads') || '0');
     const newCount = currentCount + 1;
-    
-    // Update localStorage
     localStorage.setItem('paperDownloads', newCount.toString());
     
-    // Update display
-    updateDownloadCount();
+    // Send to simple counting service for global stats
+    fetch('https://api.countapi.xyz/hit/curve-dlp-slicer/paper-download', {
+        method: 'GET'
+    }).catch(() => {
+        // Ignore errors, fallback to local count
+    });
+    
+    // Update display after a short delay to get latest count
+    setTimeout(() => {
+        updateDownloadCount();
+    }, 500);
     
     // Optional: Send analytics (uncomment if you want to use Google Analytics)
     // if (typeof gtag !== 'undefined') {
@@ -307,13 +314,24 @@ function trackDownload(type) {
 }
 
 function updateDownloadCount() {
-    const count = localStorage.getItem('paperDownloads') || '0';
     const countElement = document.getElementById('download-count');
     
     if (countElement) {
-        countElement.textContent = count;
+        // Use CountAPI for global download tracking
+        fetch('https://api.countapi.xyz/get/curve-dlp-slicer/paper-download')
+            .then(response => response.json())
+            .then(data => {
+                countElement.textContent = data.value || '0';
+            })
+            .catch(() => {
+                // Fallback to localStorage if CountAPI fails
+                const localCount = localStorage.getItem('paperDownloads') || '0';
+                countElement.textContent = localCount + ' (local)';
+            });
     }
 }
+
+
 
 // Initialize download count on page load
 function initializeDownloadCount() {
