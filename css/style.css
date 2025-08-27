@@ -398,7 +398,7 @@ h1.hero-title {
     padding: var(--space-md);
     font-size: 13px;
     color: var(--text-light);
-    text-align: center;
+    text-align: left;
     background: var(--bg-primary);
     border-top: 1px solid var(--border-light);
 }
@@ -684,7 +684,7 @@ h1.hero-title {
 .acknowledgement-content {
     max-width: 1024px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
 }
 
 .acknowledgement-content p {
