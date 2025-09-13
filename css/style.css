@@ -414,6 +414,75 @@ h1.hero-title {
     margin: 0 auto;
 }
 
+.video-platform-selector {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: var(--space-xl);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-lg);
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.platform-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: calc(var(--radius-lg) - 4px);
+    cursor: pointer;
+    transition: all var(--transition);
+    min-width: 120px;
+    justify-content: center;
+}
+
+.platform-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.platform-btn.active {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.platform-btn svg {
+    transition: all var(--transition);
+}
+
+.platform-btn[data-platform="youtube"] svg {
+    color: #FF0000;
+}
+
+.platform-btn[data-platform="bilibili"] svg {
+    color: #00A1D6;
+}
+
+.platform-btn:not(.active) svg {
+    color: var(--text-light);
+}
+
+.platform-btn.active[data-platform="youtube"] svg {
+    color: #FF0000;
+}
+
+.platform-btn.active[data-platform="bilibili"] svg {
+    color: #00A1D6;
+}
+
 .video-wrapper {
     position: relative;
     width: 100%;

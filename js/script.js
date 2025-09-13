@@ -270,6 +270,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.body.insertBefore(skipLink, document.body.firstChild);
+    
+    // ===== VIDEO PLATFORM SWITCHER =====
+    const platformButtons = document.querySelectorAll('.platform-btn');
+    const videoPlayer = document.getElementById('video-player');
+    
+    const videoUrls = {
+        youtube: 'https://www.youtube.com/embed/e8qzKNU_eP4?si=4tl7n2SYEJ4-DdF5',
+        bilibili: '//player.bilibili.com/player.html?isOutside=true&aid=115195301071542&bvid=BV1gjpLzTER3&cid=32350211859&p=1'
+    };
+    
+    platformButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const platform = this.dataset.platform;
+            
+            // Update active state
+            platformButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update video source and attributes
+            if (videoPlayer && videoUrls[platform]) {
+                videoPlayer.src = videoUrls[platform];
+                videoPlayer.title = platform === 'youtube' ? 'YouTube video player' : 'Bilibili video player';
+                
+                if (platform === 'bilibili') {
+                    videoPlayer.setAttribute('scrolling', 'no');
+                    videoPlayer.setAttribute('border', '0');
+                    videoPlayer.setAttribute('frameborder', 'no');
+                    videoPlayer.setAttribute('framespacing', '0');
+                } else {
+                    // Reset to YouTube attributes
+                    videoPlayer.removeAttribute('scrolling');
+                    videoPlayer.removeAttribute('border');
+                    videoPlayer.setAttribute('frameborder', '0');
+                    videoPlayer.removeAttribute('framespacing');
+                }
+            }
+        });
+    });
 });
 
 // ===== UTILITY FUNCTIONS =====

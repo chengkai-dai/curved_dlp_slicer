@@ -96,8 +96,26 @@
         <div class="container">
             <h2 class="section-title">Video</h2>
             <div class="video-container">
+                <!-- Video Platform Selector -->
+                <div class="video-platform-selector">
+                    <button class="platform-btn active" data-platform="youtube">
+                        <svg width="20" height="14" viewBox="0 0 20 14" fill="currentColor">
+                            <path d="M19.582 2.186c-.229-1.188-1.154-2.104-2.357-2.331C15.716-.24 9.813-.24 9.813-.24s-5.903 0-7.412.195C1.198.182.273 1.098.044 2.186-.145 3.681-.145 7.014-.145 7.014s0 3.333.189 4.828c.229 1.088 1.154 2.004 2.357 2.231 1.509.195 7.412.195 7.412.195s5.903 0 7.412-.195c1.203-.227 2.128-1.143 2.357-2.231.189-1.495.189-4.828.189-4.828s0-3.333-.189-4.828z"/>
+                            <path d="M7.814 9.814l4.9-2.8-4.9-2.8v5.6z" fill="white"/>
+                        </svg>
+                        YouTube
+                    </button>
+                    <button class="platform-btn" data-platform="bilibili">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.789 1.894v7.52c.02.764.283 1.395.789 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.789-1.893v-7.52c-.02-.765-.283-1.396-.789-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/>
+                        </svg>
+                        Bilibili
+                    </button>
+                </div>
+                
+                <!-- Video Player -->
                 <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/e8qzKNU_eP4?si=4tl7n2SYEJ4-DdF5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe id="video-player" width="560" height="315" src="https://www.youtube.com/embed/e8qzKNU_eP4?si=4tl7n2SYEJ4-DdF5" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
