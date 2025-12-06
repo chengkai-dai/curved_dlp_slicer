@@ -240,6 +240,25 @@ h1.hero-title {
     color: var(--text-primary);
 }
 
+.author a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: all var(--transition);
+    position: relative;
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+}
+
+.author a:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--primary-dark);
+}
+
+.author a:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .affiliations {
     font-size: 14px;
     color: var(--text-secondary);
